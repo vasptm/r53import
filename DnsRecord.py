@@ -8,8 +8,8 @@ class DnsRecord:
         if (self.name == ""):
             self.name = domainName
 
-        if (not(self.name.endswith(domainName))):
-            self.name = self.name + "." + domainName
+#        if (not(self.name.endswith(domainName))):
+#            self.name = self.name + "." + domainName
 
         self.changeAction = 'UPSERT'
         self.resourceRecords = [
