@@ -45,7 +45,7 @@ for row in csv:
         continue
 
     record = DnsRecord(domainName, row[1], row[0], row[2], 1800)
-    if (record.type == "SOA" or record.type == "NS" or record.type == "MX" or record.type == "REDIRECT" or record.type == "TXT"):
+    if (record.type == "SOA" or record.type == "NS" or record.type == "MX" or record.type == "REDIRECT" or record.type == "TXT" or record.type == "A"):
         continue
 
     # TODO: The TXT and MX logic need to be updated
@@ -94,18 +94,18 @@ for row in csv:
 #        }
 #    )
 
-if (any(txtValues)):
-    r53ChangeBatch["Changes"].append(
-        {
-            "Action": record.changeAction,
-            "ResourceRecordSet": {
-                "Name": domainName,
-                "Type": "TXT",
-                "TTL": 300,
-                "ResourceRecords": txtValues
-            }
-        }
-    )
+#if (any(txtValues)):
+#    r53ChangeBatch["Changes"].append(
+#        {
+#            "Action": record.changeAction,
+#            "ResourceRecordSet": {
+#                "Name": domainName,
+#                "Type": "TXT",
+#                "TTL": 300,
+#                "ResourceRecords": txtValues
+#            }
+#        }
+#    )
 
 if (not(args.debugMode)):
     route53Client.change_resource_record_sets(
